@@ -1,7 +1,7 @@
+import axios from "axios"
 import { useContext, useRef } from "react"
 import RoundButton from "./RoundButton"
-import { SetTasksContext, TasksContext, getTasks } from "./Todo.jsx"
-import axios from "axios"
+import { TasksContext, SetTasksContext, getTasks } from "./Todo.jsx"
 
 const UserInput = () => {
   const tasks = useContext(TasksContext)
@@ -9,11 +9,13 @@ const UserInput = () => {
   const nameref = useRef()
   const addtasks = () => {
     if (nameref.current?.value){
-      axios.post('/api/add',{name: nameref.current?.value}).then((a) => {
+      const newTempTask = {id: (new Date()).toISOString() ,name: nameref.current?.value, done:0}
+      const newTempTasks = [...tasks,newTempTask]
+      settasks(newTempTasks)
+      axios.post('/api/add',{name:nameref.current?.value}).then((a) => {
         console.log(a)
         getTasks(settasks)
       })
-      
     }
   }
   return (

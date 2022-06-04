@@ -11,12 +11,12 @@ const Task = ({name, checked, ind}) => {
   const settasks = useContext(SetTasksContext)
   
   const updateCheck = () => {
+    const tempNewState = tasks.map((a,i)=> {if(i==ind) {return {...a, done:!a.done}} else return a})
+    settasks(tempNewState)
     axios.post('/api/edit',{id:tasks[ind]._id, done:!(tasks[ind].done)}).then((a) => {
-      console.log(a)
       getTasks(settasks)
     })
-    //const newState = tasks.map((a,i)=> {if(i==ind) {return {...a, done:!a.done}} else return a})
-    //settasks(newState)
+    
   }
   
   const deleteTask = () => {
