@@ -4,8 +4,6 @@ import RoundButton from "./RoundButton.jsx"
 import { SetTasksContext, TasksContext, getTasks } from "./Todo.jsx"
 
 
-
-
 const Task = ({name, checked, ind}) => {
   const tasks = useContext(TasksContext)
   const settasks = useContext(SetTasksContext)
@@ -21,8 +19,8 @@ const Task = ({name, checked, ind}) => {
   
   const deleteTask = () => {
     const id = tasks[ind]._id
-    const tempNewState = tasks.filter((a,i)=> i!=ind)
-    settasks(tempNewState)
+    //const tempNewState = tasks.filter((a,i)=> i!=ind)
+    //settasks(tempNewState)
     axios.post('/api/remove',{id}).then((a) => {
       getTasks(settasks)
     })
