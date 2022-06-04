@@ -9,11 +9,10 @@ const UserInput = () => {
   const nameref = useRef()
   const addtasks = () => {
     if (nameref.current?.value){
-      const newTempTask = {id: (new Date()).toISOString() ,name: nameref.current?.value, done:0}
+      const newTempTask = {_id: (new Date()).toISOString() ,name: nameref.current?.value, done:0}
       const newTempTasks = [...tasks,newTempTask]
       settasks(newTempTasks)
       axios.post('/api/add',{name:nameref.current?.value}).then((a) => {
-        console.log(a)
         getTasks(settasks)
       })
     }
