@@ -20,7 +20,10 @@ const Task = ({name, checked, ind}) => {
   }
   
   const deleteTask = () => {
-    axios.post('/api/remove',{id:tasks[ind]._id}).then((a) => {
+    const id = tasks[ind]._id
+    const tempNewState = tasks.filter((a,i)=> i!=ind)
+    settasks(tempNewState)
+    axios.post('/api/remove',{id}).then((a) => {
       getTasks(settasks)
     })
   }
